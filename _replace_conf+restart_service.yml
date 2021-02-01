@@ -1,0 +1,22 @@
+---
+#- hosts: centos_03
+- hosts: centos_vm
+
+  vars:
+    ansible_ssh_user: root
+    ansible_ssh_pass: Vyjuf<erfa!
+
+  tasks:
+  - name: Change config file
+    replace:
+      path: /etc/zabbix/zabbix_agentd.conf
+      regexp: 'proxy-02'
+      replace: 'proxy-04'
+#     backup: yes
+
+
+  - name: "Restart service zabbix-agent"
+    service:
+      name: zabbix-agent
+      state: restarted
+    delay: 3
